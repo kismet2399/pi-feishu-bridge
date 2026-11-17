@@ -48,7 +48,7 @@
 从 npm 安装
 
 ```bash
-dsh plugin --profile web add ax-feishu-bridge --ignore-scripts
+dsh plugin --profile web add @kismet2496/pi-feishu-bridge --ignore-scripts
 ```
 
 
@@ -85,13 +85,13 @@ dsh plugin --profile web add ax-feishu-bridge --ignore-scripts
 #### 1. 安装
 
 ```bash
-pi install npm:ax-feishu-bridge
+pi install npm:@kismet2496/pi-feishu-bridge
 ```
 
 也可以从 Git 安装：
 
 ```bash
-pi install git:github.com/AX1202/ax-feishu-bridge
+pi install git:github.com/kismet2399/pi-feishu-bridge
 ```
 
 #### 2. 初始化配置
@@ -289,7 +289,7 @@ Windows PATH 加入 C:\Program Files\Git\bin
 配置默认保存在：
 
 ```text
-~/.pi/agent/feishu/config.json
+~/.pi/agent/feishu/config.pi.json
 ```
 
 也可以通过环境变量配置：
@@ -322,9 +322,9 @@ Windows PATH 加入 C:\Program Files\Git\bin
 | `FEISHU_STREAM_PUSH_INTERVAL_MS` | 向飞书推送最新正文的间隔，默认 `120` 毫秒 |
 | `FEISHU_EXT_DEV`      | `1` 时显示本地开发标识 `DEV`           |
 
-### config.json 字段
+### config.pi.json 字段
 
-除了上面的环境变量，也可以在 `config.json` 里设置（优先级：环境变量 > config.json > 默认值）：
+除了上面的环境变量，也可以在 `config.pi.json` 里设置（优先级：环境变量 > config.pi.json > 默认值）：
 
 | 字段                   | 说明                            |
 | --------------------- | ----------------------------- |
@@ -354,14 +354,17 @@ Windows PATH 加入 C:\Program Files\Git\bin
 
 | 路径                               | 内容                |
 | -------------------------------- | ----------------- |
-| `~/.pi/agent/feishu/config.json` | 机器人凭证和基础配置        |
+| `~/.pi/agent/feishu/config.pi.json` | 机器人凭证和基础配置 |
 | `~/.pi/agent/feishu/runtime-overrides.json` | 通过私聊 `/config` 保存的运行时配置覆盖 |
-| `~/.pi/agent/feishu/state.json`  | 飞书会话和 Pi 会话的映射    |
-| `~/.pi/agent/feishu/bridge.json` | 从飞书发起的 Pi 任务路由信息  |
-| `~/.pi/agent/feishu/debug.log`   | 调试日志              |
-| `~/.pi/agent/locks.json`         | 当前飞书连接的 owner 锁   |
-| `~/.pi/agent/sessions/`          | 每个飞书会话对应的 Pi 会话文件 |
-| `~/.dsh/feishu/`                 | DSH 侧的配置、状态与日志（仅安装 DSH 时产生；未装 Pi 的机器不会创建 `~/.pi`） |
+| `~/.pi/agent/feishu/state.pi.json` | 飞书会话和 Pi 会话的映射 |
+| `~/.pi/agent/feishu/bridge.pi.json` | 从飞书发起的 Pi 任务路由信息 |
+| `~/.pi/agent/feishu/dedupe.pi.json` | 已处理消息的去重记录（24 小时 TTL） |
+| `~/.pi/agent/feishu/binds.pi.json` | 群 ↔ 会话固定绑定（本 fork 新增） |
+| `~/.pi/agent/feishu/debug.pi.log` | 调试日志（结构化 JSON 行） |
+| `~/.pi/agent/feishu/daemon.log` | 后台 daemon 的标准输出 |
+| `~/.pi/agent/locks.json` | 当前飞书连接的 owner 锁 |
+| `~/.pi/agent/sessions/` | 每个飞书会话对应的 Pi 会话文件 |
+| `~/.dsh/feishu/` | DSH 侧同构文件（`config.harness.json`、`state.harness.json`、`bridge.harness.json`、`dedupe.harness.json`、`debug.harness.log`）；仅安装 DSH 时产生，未装 Pi 的机器不会创建 `~/.pi` |
 
 > 连接锁选址：机器上装有 Pi（存在 `~/.pi/agent` 目录）时沿用 `~/.pi/agent/locks.json`，保证两边能协商同一个机器人的连接；纯 DSH 环境则使用 `~/.dsh/locks.json`。
 

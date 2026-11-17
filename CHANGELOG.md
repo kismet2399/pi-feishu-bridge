@@ -3,6 +3,19 @@
 本 fork 基于 `ax-feishu-bridge@0.4.9`（上游 2026-08 后停止更新）。
 以下改动在代码中以 `[patch:xxx]` 注释标注，可用同目录的补丁脚本重放。
 
+## [0.5.2] - 2026-11-17
+
+### 文档
+
+- **修正安装命令**：`npm:ax-feishu-bridge` → `npm:@kismet2496/pi-feishu-bridge`；
+  Git 安装改为本 fork 仓库 `github.com/kismet2399/pi-feishu-bridge`；
+  DSH 安装改为 `dsh plugin --profile web add @kismet2496/pi-feishu-bridge`
+- **修正配置文件路径**：`.json` 后缀实为 `.pi.json` / `.harness.json`
+  （`config.pi.json`、`state.pi.json`、`bridge.pi.json`、`debug.pi.log` 等）
+- **补全「会保存哪些文件」**：新增 `binds.pi.json`（群↔会话绑定）、
+  `dedupe.pi.json`（消息去重）、`daemon.log`（后台输出）
+- 补回 `docs/images/1.jpeg`（README 里原本是坏链）
+
 ## [0.5.1] - 2026-11-17
 
 ### 元数据
