@@ -1,6 +1,6 @@
 {
   "name": "@kismet2496/pi-feishu-bridge",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "description": "Pi/Lark bridge (fork of ax-feishu-bridge) — Feishu WebSocket channel with CardKit streaming, maintained with local fixes",
   "type": "module",
   "license": "MIT",
@@ -69,5 +69,13 @@
     "test": "node --experimental-strip-types --experimental-transform-types --import ./test/register.mjs --test test/*.test.mjs test/*.test.ts",
     "build:strict": "tsc -p tsconfig.build.json"
   },
-  "author": "kismet"
+  "author": "kismet",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kismet2399/pi-feishu-bridge.git"
+  },
+  "homepage": "https://github.com/kismet2399/pi-feishu-bridge#readme",
+  "bugs": {
+    "url": "https://github.com/kismet2399/pi-feishu-bridge/issues"
+  }
 }

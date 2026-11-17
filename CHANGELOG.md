@@ -3,6 +3,14 @@
 本 fork 基于 `ax-feishu-bridge@0.4.9`（上游 2026-08 后停止更新）。
 以下改动在代码中以 `[patch:xxx]` 注释标注，可用同目录的补丁脚本重放。
 
+## [0.5.1] - 2026-11-17
+
+### 元数据
+
+- 补充 `repository` / `homepage` / `bugs`，指向本 fork 的源码仓库
+  <https://github.com/kismet2399/pi-feishu-bridge>
+- 便于安装前 review 源码（Pi 官方建议）
+
 ## [0.5.0] - 2026-11-17
 
 ### 修复：消息投递
