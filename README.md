@@ -1,4 +1,4 @@
-# @kismet/pi-feishu-bridge
+# @kismet2399/pi-feishu-bridge
 
 > **这是 [`ax-feishu-bridge`](https://github.com/AX1202/ax-feishu-bridge) 的 fork。**
 > 上游自 2026 年 8 月后未再更新（npm 最后版本 `0.4.9`），本仓库在其基础上继续维护。
@@ -6,7 +6,7 @@
 > - 原作者：**AX1202**，MIT License（见 [LICENSE](./LICENSE)）
 > - 本 fork 的改动全部以 `[patch:xxx]` 注释标注在代码里，摘要见 [CHANGELOG.md](./CHANGELOG.md)
 > - 主要修复：发送超时重试导致**群里重复消息**、去重记录卡死导致**消息丢失**、会话文件分叉导致**群消息在客户端不可见**
-> - 安装：`pi install npm:@kismet/pi-feishu-bridge`
+> - 安装：`pi install npm:@kismet2399/pi-feishu-bridge`
 
 支持 Deepseek Harness/Pi 接入 飞书/Lark 的消息桥接扩展：在熟悉的聊天界面里与本机 DSH/Pi 持续协作。
 

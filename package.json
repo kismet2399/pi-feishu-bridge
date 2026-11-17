@@ -1,5 +1,5 @@
 {
-  "name": "@kismet/pi-feishu-bridge",
+  "name": "@kismet2399/pi-feishu-bridge",
   "version": "0.5.0",
   "description": "Pi/Lark bridge (fork of ax-feishu-bridge) — Feishu WebSocket channel with CardKit streaming, maintained with local fixes",
   "type": "module",
