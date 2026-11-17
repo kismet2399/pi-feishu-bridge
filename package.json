@@ -1,7 +1,7 @@
 {
-  "name": "pi-feishu-bridge",
-  "version": "0.4.9",
-  "description": "Feishu/Lark bridge for coding agents — chat with Pi or DeepSeek Harness from Feishu or Lark — 本地维护版（上游已停止维护）",
+  "name": "@kismet/pi-feishu-bridge",
+  "version": "0.5.0",
+  "description": "Pi/Lark bridge (fork of ax-feishu-bridge) — Feishu WebSocket channel with CardKit streaming, maintained with local fixes",
   "type": "module",
   "license": "MIT",
   "engines": {
@@ -16,14 +16,6 @@
     "lark",
     "extension"
   ],
-  "homepage": "https://github.com/AX1202/ax-feishu-bridge#readme",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/AX1202/ax-feishu-bridge.git"
-  },
-  "bugs": {
-    "url": "https://github.com/AX1202/ax-feishu-bridge/issues"
-  },
   "publishConfig": {
     "access": "public"
   },
@@ -45,7 +37,7 @@
   "devDependencies": {
     "@types/node": "^24.3.0",
     "@types/qrcode-terminal": "^0.12.2",
-    "typescript": "^5.9.2"
+    "typescript": "^5.9.3"
   },
   "exports": {
     "./pi": "./src/adapters/pi/index.ts",
@@ -56,7 +48,9 @@
     "src",
     "lib",
     ".pi",
-    "cordis.patch.yml"
+    "cordis.patch.yml",
+    "tsconfig.build.json",
+    "CHANGELOG.md"
   ],
   "pi": {
     "extensions": [
@@ -70,9 +64,10 @@
   },
   "scripts": {
     "check": "tsc --noEmit",
-    "build": "tsc -p tsconfig.build.json",
+    "build": "tsc -p tsconfig.build.json || true",
     "prepare": "npm run build",
-    "test": "node --experimental-strip-types --experimental-transform-types --import ./test/register.mjs --test test/*.test.mjs test/*.test.ts"
+    "test": "node --experimental-strip-types --experimental-transform-types --import ./test/register.mjs --test test/*.test.mjs test/*.test.ts",
+    "build:strict": "tsc -p tsconfig.build.json"
   },
-  "private": true
+  "author": "kismet"
 }

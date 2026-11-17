@@ -8,7 +8,7 @@ import { isAbsolute, join, resolve } from "node:path";
 export function resolveWorkspacePath(input: string) {
   const trimmed = input.trim();
   if (!trimmed) {
-    throw new Error("请在 /workspace 后面带上目录路径，例如：/workspace /Users/ax/project");
+    throw new Error("请在 /workspace 后面带上目录路径，例如：/workspace ~/project");
   }
 
   const expanded = trimmed === "~" || trimmed.startsWith("~/")
