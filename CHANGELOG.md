@@ -3,6 +3,17 @@
 本 fork 基于 `ax-feishu-bridge@0.4.9`（上游 2026-08 后停止更新）。
 以下改动在代码中以 `[patch:xxx]` 注释标注，可用同目录的补丁脚本重放。
 
+## [Unreleased]
+
+### 工程与质量
+
+- 新增 `test/`：**19 个用例**覆盖三处关键逻辑 —— 发送超时不重发、崩溃后消息可重新接管、会话分叉合并
+- 新增 `scripts/check.mjs`：类型检查只忽略 TS2307（宿主模块由运行时注入），其余错误照常失败
+- 修复 `tsconfig.json` 的 `"outDir": undefined`（JSON 不支持 undefined，触发 TS5024）
+- 修复 `npm test` 脚本：移除 Node 24 已删除的 `--experimental-transform-types`
+- 新增 GitHub Actions CI：`check` + `test` + `npm pack` 三重校验
+- README 增加「开发」章节（测试覆盖、patch 标记约定、发布流程）
+
 ## [1.0.0] - 2026-11-19
 
 首个 1.0 版本。经过 0.5.0 → 0.5.2 的完善，三条核心链路已稳定：

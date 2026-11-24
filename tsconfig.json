@@ -1,7 +1,6 @@
 {
   "extends": "./tsconfig.build.json",
   "compilerOptions": {
-    "noEmit": true,
-    "outDir": undefined
+    "noEmit": true
   }
 }

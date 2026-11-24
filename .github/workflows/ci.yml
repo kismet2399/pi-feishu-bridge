@@ -1,0 +1,32 @@
+name: CI
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+
+      # 宿主模块（@earendil-works/pi-coding-agent、typebox、@deepseek-ai/dsh-*）
+      # 刻意不进 dependencies，用 --legacy-peer-deps 跳过 peer 解析
+      - name: Install dependencies
+        run: npm ci --legacy-peer-deps
+
+      - name: Type check
+        run: npm run check
+
+      - name: Unit tests
+        run: npm test
+
+      # 校验发布产物：确认 src / lib / .pi / LICENSE / CHANGELOG 都在包里
+      - name: Package dry-run
+        run: npm pack --dry-run

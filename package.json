@@ -63,11 +63,12 @@
     }
   },
   "scripts": {
-    "check": "tsc --noEmit",
+    "check": "node scripts/check.mjs",
     "build": "tsc -p tsconfig.build.json || true",
     "prepare": "npm run build",
-    "test": "node --experimental-strip-types --experimental-transform-types --import ./test/register.mjs --test test/*.test.mjs test/*.test.ts",
-    "build:strict": "tsc -p tsconfig.build.json"
+    "test": "node --import ./test/register.mjs --test test/*.test.mjs",
+    "build:strict": "tsc -p tsconfig.build.json",
+    "check:strict": "tsc --noEmit"
   },
   "author": "kismet",
   "repository": {

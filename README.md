@@ -400,3 +400,39 @@ Windows PATH 加入 C:\Program Files\Git\bin
 `open`模式下：群里和话题里可直接回复，不需要 @，但还需手动在飞书开发者后台开启机器人“获取群组中所有消息”权限才能生效。
 
 ### 还没有实现后台服务开机自启动功能，目前需要电脑开机后手动启动一次 Pi agent 才能正常工作。启动后，Pi agent 无需前台运行，关闭后，仍可以在飞书/Lark 里对话。
+
+***
+
+## 开发
+
+```bash
+npm ci --legacy-peer-deps   # 宿主模块不进依赖，跳过 peer 解析
+npm run check               # 类型检查（忽略 TS2307：宿主模块由运行时注入）
+npm run check:strict        # 原始 tsc，会报 17 条宿主模块缺失
+npm test                    # 单元测试（19 个用例）
+npm run build               # 重建 lib/（DSH harness 形态用）
+```
+
+### 测试覆盖什么
+
+| 文件 | 保护的行为 |
+|---|---|
+| `test/retry.test.mjs` | 发送超时**不重发**（否则群里重复消息）；429/5xx 仍重试 |
+| `test/dedupe-store.test.mjs` | daemon 崩溃后消息**可重新接管**（否则 24h 内永久丢弃） |
+| `test/branch-merge.test.mjs` | 会话分叉**收敛成单链**（否则群消息在客户端不可见） |
+
+测试通过 `test/register.mjs` 把 `HOME` 重定向到临时目录，不会污染真实的 `~/.pi/agent/feishu/`。
+
+### 代码里的 `[patch:xxx]` 标记
+
+本仓库基于 `ax-feishu-bridge@0.4.9`，本地修复以 `[patch:xxx]` 注释标注在改动处，便于与上游对比、也便于追溯每处改动的动机。摘要见 [CHANGELOG.md](./CHANGELOG.md)。
+
+### 发布
+
+```bash
+npm version patch
+git push origin master --tags
+npm publish --access public --registry https://registry.npmjs.org
+```
+
+> npm 发布后约 2~3 分钟才生效（返回 202 Accepted），期间 `npm view` 会显示上一版本。
