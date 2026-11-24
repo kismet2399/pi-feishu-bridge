@@ -409,7 +409,7 @@ Windows PATH 加入 C:\Program Files\Git\bin
 npm ci --legacy-peer-deps   # 宿主模块不进依赖，跳过 peer 解析
 npm run check               # 类型检查（忽略 TS2307：宿主模块由运行时注入）
 npm run check:strict        # 原始 tsc，会报 17 条宿主模块缺失
-npm test                    # 单元测试（19 个用例）
+npm test                    # 单元测试（覆盖发送重试 / 消息去重 / 分叉合并）
 npm run build               # 重建 lib/（DSH harness 形态用）
 ```
 
