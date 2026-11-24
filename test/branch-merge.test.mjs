@@ -13,6 +13,27 @@ import { join } from "node:path";
 
 import { mergeBranches } from "../src/feishu/branch-merge.ts";
 
+// ─── 隔离守卫 ────────────────────────────────────────────────────────────
+// 本测试会写入 ~/.pi/agent/feishu/ 下的真实数据文件。
+// 安全性完全依赖 test/register.mjs 把 HOME 重定向到临时目录 ——
+// 若有人直接 `node --test test/xxx.test.mjs`（漏了 --import），
+// 就会污染线上去重记录与日志。这里做硬性拦截。
+{
+  const { homedir, tmpdir } = await import("node:os");
+  const { realpathSync } = await import("node:fs");
+  const home = realpathSync(homedir());
+  const sandbox = realpathSync(tmpdir());
+  if (!home.startsWith(sandbox)) {
+    throw new Error(
+      `测试未在沙箱中运行：当前 HOME=${home}\n` +
+      `请用 \`npm test\` 运行（会通过 test/register.mjs 把 HOME 指向临时目录），\n` +
+      `否则会污染真实的 ~/.pi/agent/feishu/ 数据。`
+    );
+  }
+}
+// ────────────────────────────────────────────────────────────────────────
+
+
 const ts = (sec) => `2026-11-17T0${sec}:00:00.000Z`;
 
 /** 写一个会话文件；把 mtime 提前，绕过 mergeBranches 的 QUIET_MS(2s) 保护 */

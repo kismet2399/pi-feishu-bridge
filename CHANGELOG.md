@@ -3,7 +3,7 @@
 本 fork 基于 `ax-feishu-bridge@0.4.9`（上游 2026-08 后停止更新）。
 以下改动在代码中以 `[patch:xxx]` 注释标注，可用同目录的补丁脚本重放。
 
-## [Unreleased]
+## [1.0.1] - 2026-11-24
 
 ### 工程与质量
 
@@ -12,6 +12,7 @@
 - 修复 `tsconfig.json` 的 `"outDir": undefined`（JSON 不支持 undefined，触发 TS5024）
 - 修复 `npm test` 脚本：移除 Node 24 已删除的 `--experimental-transform-types`
 - 新增 GitHub Actions CI：`check` + `test` + `npm pack` 三重校验
+- **测试隔离守卫**：测试文件会写入 `~/.pi/agent/feishu/`，若脱离 `test/register.mjs`（把 HOME 指向临时目录）单独运行会污染真实数据。三个测试文件顶部新增硬性拦截，实测未沙箱化时报错退出且真实文件零改动
 - README 增加「开发」章节（测试覆盖、patch 标记约定、发布流程）
 
 ## [1.0.0] - 2026-11-19
